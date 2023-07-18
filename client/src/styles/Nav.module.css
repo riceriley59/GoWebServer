@@ -1,0 +1,47 @@
+.nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    width: 100vw;
+}
+
+.logo{
+    width: 75px;
+    margin: 20px;
+}
+
+.links{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.links li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 18px;
+    margin: 30px;
+    text-decoration: none;
+    background-color: #00aad8;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: default;
+}
+
+.links li a:hover{
+    background-color: white;
+    color: #00aad8;
+    transition: 0.3s;
+}
+
+.float_right{
+    float: right;
+}
+
+.float_left{
+    float: left;
+}
