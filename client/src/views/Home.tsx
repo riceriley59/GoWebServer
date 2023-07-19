@@ -7,7 +7,6 @@ import Options from '../components/Options';
 
 const Home: React.FC<{}> = () => {
     return (
-        <>
         <div className={styles.container}>
             <div className={styles.left}>
                 <Servers />
@@ -19,7 +18,6 @@ const Home: React.FC<{}> = () => {
                 <Options />
             </div>
         </div>
-        </>
     );
 }
 
