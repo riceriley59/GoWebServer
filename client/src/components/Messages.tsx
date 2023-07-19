@@ -1,9 +1,9 @@
 import React from "react";
 
-const Register: React.FC<{}> = () => {
+const Messages: React.FC<{}> = () => {
     return (
         <></>
     );
 }
 
-export default Register;
+export default Messages;

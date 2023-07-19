@@ -1,9 +1,9 @@
 import React from "react";
 
-const Register: React.FC<{}> = () => {
+const Options: React.FC<{}> = () => {
     return (
         <></>
     );
 }
 
-export default Register;
+export default Options;
