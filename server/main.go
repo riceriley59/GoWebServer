@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
@@ -21,5 +22,5 @@ func main() {
 		})
 	}
 
-	router.Run(":5000")
+	router.Run(":" + os.Args[1])
 }
