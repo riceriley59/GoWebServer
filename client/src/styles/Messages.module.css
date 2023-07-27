@@ -1,8 +1,18 @@
 .container {
     display: flex;
     flex-direction: column;
-    border: 1px solid transparent;
+    border: 1px solid rgba(0, 0, 0, 1);
+    background-color: transparent;
     border-radius: 5px;
     width: 95%;
     height: 95%;
+}
+
+.messages{
+    flex: 92%;
+    margin-bottom: 10px;
+}
+
+.chat{
+    flex: 8%;
 }

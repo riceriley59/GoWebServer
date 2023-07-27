@@ -1,0 +1,36 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
+.search{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    background-color: #00aad8;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: default;
+    flex: 10%;
+    height: 100%;
+    margin-left: 5px;
+}
+
+.search:hover {
+    background-color: white;
+    color: #00aad8;
+    transition: 0.3s;
+}
+
+.input{
+    flex: 90%;
+    height: 100%;
+    border: 0px;
+    padding: 0px;
+}
