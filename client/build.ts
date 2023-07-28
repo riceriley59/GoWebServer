@@ -1,5 +1,6 @@
 const esbuild = require("esbuild");
 const inlineImage = require('esbuild-plugin-inline-image');
+const cssModulesPlugin = require("esbuild-css-modules-plugin");
 
 esbuild.build({
     entryPoints: ["./src/index.tsx"],
@@ -10,5 +11,5 @@ esbuild.build({
     loader: {
         ".ts": "tsx",
     },
-    plugins: [inlineImage()],
+    plugins: [inlineImage(), cssModulesPlugin()],
 }).catch(() => process.exit(1));

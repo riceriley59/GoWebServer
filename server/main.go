@@ -11,7 +11,7 @@ import (
 func main() {
 	router := gin.Default()
 
-	router.Use(static.Serve("/", static.LocalFile("../client/public", true)))
+	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
 
 	api := router.Group("/api")
 	{
