@@ -18,7 +18,7 @@
     border-radius: 5px;
     cursor: default;
     flex: 10%;
-    height: 100%;
+    padding: 15px 18px;
     margin-left: 5px;
 }
 
@@ -30,7 +30,16 @@
 
 .input{
     flex: 90%;
-    height: 100%;
     border: 0px;
-    padding: 0px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    background-color: #eceff4;
+    color: #282c34;
+    font-size: 100%;
+    font-weight: 600;
+    resize: none;
+}
+
+.input:focus {
+    outline: none;
 }
