@@ -16,9 +16,7 @@ const MessageBox: React.FC<{}> = () => {
     
     return (
         <div className={styles.container}>
-            <Message message="Testing a long sentence just to see how this deals with really long sentences" sender={false} />
-            <Message message="Testing" sender={true} />
-            <Message message="Testing again" sender={false} />
+            
         </div>
     );
 }

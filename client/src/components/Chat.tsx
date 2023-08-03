@@ -29,6 +29,7 @@ const Chat: React.FC<{}> = () => {
 
         if(textAreaRef.current){
             textAreaRef.current.value = "";
+            setValue("");
         }
     }
 
