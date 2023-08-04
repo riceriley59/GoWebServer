@@ -1,41 +1,35 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
+	"GoWebServer/database"
+	"GoWebServer/models"
+
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
-
-	_ "github.com/lib/pq"
+	"github.com/joho/godotenv"
 )
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "gochat-user"
-	password = "Bronson32*Buggees32*"
-	dbname   = "gochat"
-)
+func loadDatabase() {
+	database.Connect()
+	database.Database.AutoMigrate(&models.User{})
+}
+
+func loadEnv() {
+	err := godotenv.Load(".env.local")
+
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
 
 func main() {
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
-	db, err := sql.Open("postgres", psqlInfo)
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
-
-	err = db.Ping()
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("Successfully connected!")
+	loadEnv()
+	loadDatabase()
 
 	router := gin.Default()
 
