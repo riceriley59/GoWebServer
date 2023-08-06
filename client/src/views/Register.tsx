@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import styles from '../styles/Register.module.css';
 
@@ -9,15 +9,29 @@ const Register: React.FC<{}> = () => {
     const [email, setEmail] = useState("")
     const [errorMsg, setErrorMsg] = useState("")
 
-    const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
+    useEffect(() => {
+        const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
+        setErrorMsg("");
 
-    let validInputs = false;
+        console.log(password);
+        console.log(repeatPassword);
+
+        if(emailRegex.test(email) === false && email){
+            setErrorMsg((errorMsg) => errorMsg + "That isn't a valid email address. ");
+        }
+
+        if (password !== repeatPassword && password && repeatPassword){
+            setErrorMsg((errorMsg) => errorMsg + "Your passwords don't match. ");
+        }
+    }, [password, repeatPassword, name, email]);
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        
+
+        setErrorMsg("");
+
         try{
-            if(validInputs) {
+            if(!errorMsg) {
                 let response = await fetch("/api/create/user", {
                     method: "POST",
                     body: JSON.stringify({
@@ -31,21 +45,6 @@ const Register: React.FC<{}> = () => {
             }
         }catch (err: any) {
             console.log(err)
-        }
-    }
-
-    const validateForm = () => {
-        validInputs = true;
-        setErrorMsg("");
-
-        if(emailRegex.test(email) === false){
-            setErrorMsg(errorMsg + "That isn't a valid email address. ");
-            validInputs = false;
-        }
-
-        if (password !== repeatPassword){
-            setErrorMsg(errorMsg + "Your passwords don't match. ");
-            validInputs = false;
         }
     }
 
@@ -75,7 +74,7 @@ const Register: React.FC<{}> = () => {
                 <input id="passwordRepeat" type="password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} required />
             </div>
 
-            <input type="submit" value="Register" onClick={validateForm} />
+            <input type="submit" value="Register" onClick={() => setErrorMsg("")} />
             <p>{ errorMsg }</p>
         </form>
     );
