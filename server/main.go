@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"net/http"
 	"os"
 
+	"GoWebServer/api"
 	"GoWebServer/database"
 	"GoWebServer/models"
 
@@ -16,7 +15,7 @@ import (
 
 func loadDatabase() {
 	database.Connect()
-	database.Database.AutoMigrate(&models.User{})
+	database.Database.AutoMigrate(&models.User{}, &models.Message{})
 }
 
 func loadEnv() {
@@ -28,23 +27,17 @@ func loadEnv() {
 }
 
 func main() {
+	// load env vars and connect to DB
 	loadEnv()
 	loadDatabase()
 
+	//intialize router and '/' dir to server static react bundle
 	router := gin.Default()
-
 	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
 
-	api := router.Group("/api")
-	{
-		api.GET("/", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "pong",
-			})
-		})
-	}
+	//setup api routes
+	api.Routes(router)
 
-	router.Run(":" + os.Args[1])
-
-	fmt.Println("")
+	//run server on port specified by env var
+	router.Run(":" + os.Getenv("PORT"))
 }
