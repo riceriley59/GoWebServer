@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
 
 import styles from '../styles/Register.module.css';
 
@@ -13,9 +13,6 @@ const Register: React.FC<{}> = () => {
         const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
         setErrorMsg("");
 
-        console.log(password);
-        console.log(repeatPassword);
-
         if(emailRegex.test(email) === false && email){
             setErrorMsg((errorMsg) => errorMsg + "That isn't a valid email address. ");
         }
@@ -25,14 +22,14 @@ const Register: React.FC<{}> = () => {
         }
     }, [password, repeatPassword, name, email]);
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
         setErrorMsg("");
 
         try{
             if(!errorMsg) {
-                let response = await fetch("/api/create/user", {
+                let response = await fetch("/api/register", {
                     method: "POST",
                     body: JSON.stringify({
                         username: name,
@@ -40,6 +37,8 @@ const Register: React.FC<{}> = () => {
                         email: email,
                     })
                 });
+
+                let results = await response.json();
 
                 resetForm();
             }

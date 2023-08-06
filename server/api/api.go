@@ -9,6 +9,7 @@ import (
 func Routes(route *gin.Engine) {
 	api := route.Group("/api")
 	{
-		api.POST("/create/user", controller.CreateUser)
+		api.POST("/register", controller.CreateUser)
+		api.POST("/login", controller.QueryUser)
 	}
 }
