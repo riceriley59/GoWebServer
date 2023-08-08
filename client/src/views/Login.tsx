@@ -40,7 +40,6 @@ const Login: React.FC<{}> = () => {
                 let results = await response.json();
 
                 if(response.status === 401){
-                    console.log(results.data);
                     setErrorMsg((errorMsg) => errorMsg + results.data);
                 }else if(response.ok){
                     loginUser();

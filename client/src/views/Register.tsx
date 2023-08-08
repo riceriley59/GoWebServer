@@ -40,6 +40,10 @@ const Register: React.FC<{}> = () => {
 
                 let results = await response.json();
 
+                if(!response.ok){
+                    setErrorMsg((errorMsg) => errorMsg + results.data)
+                }
+
                 resetForm();
             }
         }catch (err: any) {
