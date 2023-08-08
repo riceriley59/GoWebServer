@@ -29,6 +29,16 @@
     color: #282c34;
 }
 
+.fields input[type=password]{
+    margin: 12px;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    width: 250px;
+    height: 30px;
+    color: #282c34;
+}
+
 input[type=submit] {
     display: block;
     color: #eceff4;

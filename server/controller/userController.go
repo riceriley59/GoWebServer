@@ -49,7 +49,7 @@ func QueryUser(c *gin.Context) {
 		return
 	}
 
-	result := database.Database.Where("username = ?", loginUser.Username).First(&queryUser)
+	result := database.Database.Where("username = ?", loginUser.Username).Or("email = ?", loginUser.Username).First(&queryUser)
 
 	if result.Error != nil {
 		c.IndentedJSON(http.StatusUnauthorized, gin.H{"data": "Can't find user. "})

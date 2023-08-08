@@ -11,5 +11,8 @@ func Routes(route *gin.Engine) {
 	{
 		api.POST("/register", controller.CreateUser)
 		api.POST("/login", controller.QueryUser)
+
+		api.POST("/message/create", controller.CreateMessage)
+		api.GET("/message", controller.GetMessages)
 	}
 }

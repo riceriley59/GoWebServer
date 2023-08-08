@@ -8,15 +8,16 @@ const Login: React.FC<{}> = () => {
     const [errorMsg, setErrorMsg] = useState("");
 
     useEffect(() => {
-        const regex = new RegExp(/^[A-Za-z0-9_!#$%&'*+=?`{|}~^.-]/, "gm");
+        const regex = /^[a-z0-9_.@]+$/;
+        const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         setErrorMsg("")
 
-        if(regex.test(name) && name){
+        if(!regex.test(name) && name){
             setErrorMsg((errorMsg) => errorMsg + "That isn't a valid username or email. ");
         }
 
-        if(regex.test(password) && password){
-            setErrorMsg((errorMsg) => errorMsg + "That isn't a valid password.");
+        if(!passwordRegex.test(password) && password){
+            setErrorMsg((errorMsg) => errorMsg + "That password isn't strong enough.");
         }
     }, [password, name]);
 
@@ -39,7 +40,7 @@ const Login: React.FC<{}> = () => {
 
                 let results = await response.json();
 
-                if(response.status === 401){
+                if(!response.ok){
                     setErrorMsg((errorMsg) => errorMsg + results.data);
                 }else if(response.ok){
                     loginUser();
@@ -67,7 +68,7 @@ const Login: React.FC<{}> = () => {
                 <input id="username" type="text" value={name} onChange={(e) => setName(e.target.value)} />
 
                 <label htmlFor="passwords">Password:</label>
-                <input id="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
 
             <input type="submit" value="Login" onClick={() => setErrorMsg("")}/>
