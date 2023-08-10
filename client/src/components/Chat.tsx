@@ -22,10 +22,21 @@ const Chat: React.FC<{}> = () => {
 
     useAutosizeTextArea(textAreaRef.current, value);
 
-    const sendMessage = (e: MouseEvent<HTMLButtonElement>) => {
+    const sendMessage = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        console.log(value);
+        let response = await fetch("/api/message/create", {
+            method: "POST",
+            body: JSON.stringify({
+                content: value
+            })
+        });       
+
+        let results = await response.json();
+
+        if(!response.ok){
+            console.log("Error sending message.");
+        }
 
         if(textAreaRef.current){
             textAreaRef.current.value = "";

@@ -15,7 +15,7 @@ import (
 
 func loadDatabase() {
 	database.Connect()
-	database.Database.AutoMigrate(&models.User{})
+	database.Database.AutoMigrate(&models.User{}, &models.Message{})
 }
 
 func loadEnv() {
